@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goserver
+  labels:
+    app: goserver
+    version: 1.0.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: goserver
+  template:
+    metadata:
+      labels:
+        app: goserver
+        version: 1.0.0
+    spec:
+      containers:
+        - name: goserver
+          image: boeboe/goserver:1.0.0
+          imagePullPolicy: Always
+          command: ["/goserver"]
+          args: [""]
+          ports:
+            - name: goserver
+              containerPort: 8080
+---

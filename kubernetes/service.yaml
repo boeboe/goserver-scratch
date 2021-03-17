@@ -1,0 +1,19 @@
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wetty-bson-decode
+  labels:
+    app: wetty-bson-decode
+    version: 1.0.0
+spec:
+  type: NodePort
+  ports:
+    - name: wetty-web
+      port: 8080
+      targetPort: wetty-web
+      nodePort: 30080
+  selector:
+    app: wetty-bson-decode
+---

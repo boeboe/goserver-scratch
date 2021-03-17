@@ -1,0 +1,4 @@
+github.com/boeboe/flag v1.7.4 h1:S/EJrnAimFv6+EX9PhwVT135ArSpyINQuewxSTLU4ws=
+github.com/boeboe/flag v1.7.4/go.mod h1:7+28UiDwo3jFhz+YA1BRvYrz0BZg/rpfIfP/hRLvcyU=
+github.com/namsral/flag v1.7.4-pre.0.20170814194028-67f268f20922 h1:LdiOM0EFQG9RgQJGhrW1GL0qpfSQU28FNppDFyKjH8g=
+github.com/namsral/flag v1.7.4-pre.0.20170814194028-67f268f20922/go.mod h1:OXldTctbM6SWH1K899kPZcf65KxJiD7MsceFUpB5yDo=
