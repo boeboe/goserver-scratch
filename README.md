@@ -5,6 +5,7 @@ A small scratch based docker container with and GoLang HTTP server and client, c
 This container can be used to generate a network of microservices for performance testing
 
 https://github.com/boeboe/goserver-scratch
+
 https://hub.docker.com/repository/docker/boeboe/goserver-scratch
 
 ### Usage
@@ -38,5 +39,5 @@ Usage of goserver:
 #### Docker
 
 ```
-docker run -i -t --rm -p 8080:8080 --name="goserver-scratch" boeboe/goserver-scratch:1.0.0 -verbose
+docker run -i -t --rm -p 8080:8080 --name="goserver-scratch" boeboe/goserver-scratch:1.0.0 -help
 ```

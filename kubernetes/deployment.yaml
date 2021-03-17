@@ -21,9 +21,17 @@ spec:
         - name: goserver
           image: boeboe/goserver:1.0.0
           imagePullPolicy: Always
-          command: ["/goserver"]
-          args: [""]
           ports:
             - name: goserver
-              containerPort: 8080
----
+              containerPort: 9090
+          env:
+            - name: B3_TRACE
+              value: true
+            - name: REQUEST_SIZE
+              value: 100
+            - name: RESPONSE_SIZE
+              value: 500
+            - name: SERVER_PORT
+              value: 9090
+            - name: VERBOSE
+              value: true
