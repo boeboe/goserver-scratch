@@ -21,7 +21,7 @@ spec:
       serviceAccountName: {{ .Values.service.account }}
       containers:
         - name: goserver
-          image: boeboe/goserver:1.0.0
+          image: boeboe/goserver-scratch:1.0.0
           imagePullPolicy: {{ .Values.deployment.pullPolicy }}
           ports:
             - name: goserver
