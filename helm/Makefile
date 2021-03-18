@@ -38,3 +38,9 @@ restart: ## Restart all microservices
 view: ## View all microservices
 	kubectl -n ${NAMESPACE} get services -o wide
 	kubectl -n ${NAMESPACE} get pods -o wide
+
+k6_install:
+	kubectl  -n ${NAMESPACE} apply -f example/k6.yaml
+
+k6_uninstall:
+	kubectl  -n ${NAMESPACE} delete -f example/k6.yaml
