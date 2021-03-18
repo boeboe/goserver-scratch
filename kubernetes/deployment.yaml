@@ -29,15 +29,15 @@ spec:
             - name: B3_TRACE
               value: "true"
             - name: REQUEST_SIZE
-              value: 100
+              value: "100"
             - name: RESPONSE_SIZE
-              value: 500
+              value: "500"
             - name: SERVER_PORT
-              value: 9090
+              value: "9090"
             - name: UPSTREAM_HOST
               value: ""
             - name: UPSTREAM_PORT
-              value: 9090
+              value: "9090"
             - name: VERBOSE
               value: "true"
           livenessProbe:

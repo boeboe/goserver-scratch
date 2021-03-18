@@ -30,15 +30,15 @@ spec:
             - name: B3_TRACE
               value: "{{ .Values.goserver.b3Trace }}"
             - name: REQUEST_SIZE
-              value: {{ .Values.goserver.requestSize }}
+              value: "{{ .Values.goserver.requestSize }}"
             - name: RESPONSE_SIZE
-              value: {{ .Values.goserver.responseSize }}
+              value: "{{ .Values.goserver.responseSize }}"
             - name: SERVER_PORT
-              value: {{ .Values.goserver.serverPort }}
+              value: "{{ .Values.goserver.serverPort }}"
             - name: UPSTREAM_HOST
               value: {{ .Values.goserver.upstreamHost }}
             - name: UPSTREAM_PORT
-              value: {{ .Values.goserver.upstreamPort }}
+              value: "{{ .Values.goserver.upstreamPort }}"
             - name: VERBOSE
               value: "{{ .Values.goserver.verbose }}"
           livenessProbe:
