@@ -12,6 +12,12 @@ deployment:
       cpu: 200m
       memory: 256Mi
 
+hpa:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+
 goserver:
   b3Trace: false
   requestSize: 50
