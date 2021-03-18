@@ -17,6 +17,7 @@ spec:
         app: goserver
         version: 1.0.0
     spec:
+      serviceAccountName: goserver
       containers:
         - name: goserver
           image: boeboe/goserver:1.0.0
@@ -33,5 +34,25 @@ spec:
               value: 500
             - name: SERVER_PORT
               value: 9090
+            - name: UPSTREAM_HOST
+              value: ""
+            - name: UPSTREAM_PORT
+              value: 9090
             - name: VERBOSE
               value: true
+          livenessProbe:
+            httpGet:
+              path: "/"
+              port: 9090
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: "/"
+              port: 9090
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi

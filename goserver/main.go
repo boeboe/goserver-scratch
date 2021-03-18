@@ -58,9 +58,15 @@ func (sc ServerConfig) get(res http.ResponseWriter, req *http.Request) {
 		}
 
 		client := &http.Client{}
-		upstreamresp, err := client.Do(upstreamreq)
-		if err != nil {
-			log.Fatal(err)
+
+		upstreamresp, errdo := client.Do(upstreamreq)
+
+		for errdo != nil {
+			if sc.verbose {
+				log.Printf("Upstream request failed, sleep 1s and try again")
+			}
+			time.Sleep(1 * time.Second)
+			upstreamresp, errdo = client.Do(upstreamreq)
 		}
 
 		defer upstreamresp.Body.Close()
@@ -135,9 +141,9 @@ func main() {
 		upstreamport: *upstreamport,
 		verbose:      *verbose}
 
-	log.Printf("Bootstrap configuration:\n\tb3trace: %t\n\trequestsize: %d\n\t"+
-		"responsesize: %d\n\tservername: %s\n\tserverport: %d\n\tupstreamhost: %s\n\t"+
-		"upstreamport: %d\n\tverbose: %t\n", sc.b3trace, sc.requestsize, sc.responsesize,
+	log.Printf("Bootstrap configuration:\n\tb3_trace: %t\n\trequest_size: %d\n\t"+
+		"response_size: %d\n\tserver_name: %s\n\tserver_port: %d\n\tupstream_host: %s\n\t"+
+		"upstream_port: %d\n\tverbose: %t\n", sc.b3trace, sc.requestsize, sc.responsesize,
 		sc.servername, sc.serverport, sc.upstreamhost, sc.upstreamport, sc.verbose)
 
 	http.HandleFunc("/", sc.get)
