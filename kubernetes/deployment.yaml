@@ -20,7 +20,7 @@ spec:
       serviceAccountName: goserver
       containers:
         - name: goserver
-          image: boeboe/goserver:1.0.0
+          image: boeboe/goserver-scratch:1.0.0
           imagePullPolicy: Always
           ports:
             - name: goserver
