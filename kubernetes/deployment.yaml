@@ -16,6 +16,8 @@ spec:
       labels:
         app: goserver
         version: 1.0.0
+      annotations:
+        sidecar.istio.io/rewriteAppHTTPProbers: "true"
     spec:
       serviceAccountName: goserver
       containers:
@@ -42,13 +44,13 @@ spec:
               value: "true"
           livenessProbe:
             httpGet:
-              path: "/"
+              path: "/health"
               port: 9090
             initialDelaySeconds: 30
             periodSeconds: 30
           readinessProbe:
             httpGet:
-              path: "/"
+              path: "/health"
               port: 9090
             initialDelaySeconds: 10
             periodSeconds: 10

@@ -17,6 +17,8 @@ spec:
       labels:
         app: {{ .Values.service.name }}
         version: {{ .Values.service.version }}
+      annotations:
+        sidecar.istio.io/rewriteAppHTTPProbers: "true"
     spec:
       serviceAccountName: {{ .Values.service.account }}
       containers:
@@ -43,13 +45,13 @@ spec:
               value: "{{ .Values.goserver.verbose }}"
           livenessProbe:
             httpGet:
-              path: "{{ .Values.deployment.livenessProbe.endpointPath}}"
+              path: "/health"
               port: {{ .Values.goserver.serverPort }}
             initialDelaySeconds: {{ .Values.deployment.livenessProbe.initialDelaySeconds}}
             periodSeconds: {{ .Values.deployment.livenessProbe.periodSeconds}}
           readinessProbe:
             httpGet:
-              path: "{{ .Values.deployment.readinessProbe.endpointPath}}"
+              path: "/health"
               port: {{ .Values.goserver.serverPort }}
             initialDelaySeconds: {{ .Values.deployment.readinessProbe.initialDelaySeconds}}
             periodSeconds: {{ .Values.deployment.readinessProbe.periodSeconds}}

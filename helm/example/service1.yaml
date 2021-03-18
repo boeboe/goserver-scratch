@@ -1,13 +1,11 @@
 deployment:
   livenessProbe:
-    endpointPath: "/"
     initialDelaySeconds: 30
     periodSeconds: 30
   pullPolicy: IfNotPresent
   readinessProbe:
     initialDelaySeconds: 10
     periodSeconds: 10
-    endpointPath: "/"
   replicas: 1
   resources:
     requests:
