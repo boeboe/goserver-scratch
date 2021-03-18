@@ -8,7 +8,7 @@ help: ## This help
 CHART_DIR := ./goserver
 NAMESPACE := example
 
-install: istioctl  ## Install microservices
+install:  ## Install microservices
 	kubectl create namespace ${NAMESPACE} || true
 	kubectl label namespace ${NAMESPACE} istio-injection=enabled --overwrite
 	helm install service1 ${CHART_DIR} --namespace ${NAMESPACE} --values example/service1.yaml || true
