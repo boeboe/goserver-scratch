@@ -1,0 +1,59 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.service.name }}
+  labels:
+    app: {{ .Values.service.name }}
+    chart: 'goserver-{{ .Chart.Version | replace "+" "_" }}'
+    version: {{ .Values.service.version }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.service.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.service.name }}
+        version: {{ .Values.service.version }}
+    spec:
+      serviceAccountName: {{ .Values.service.account }}
+      containers:
+        - name: goserver
+          image: boeboe/goserver:1.0.0
+          imagePullPolicy: {{ .Values.deployment.pullPolicy }}
+          ports:
+            - name: goserver
+              containerPort: {{ .Values.goserver.serverPort }}
+          env:
+            - name: B3_TRACE
+              value: {{ .Values.goserver.b3Trace }}
+            - name: REQUEST_SIZE
+              value: {{ .Values.goserver.requestSize }}
+            - name: RESPONSE_SIZE
+              value: {{ .Values.goserver.responseSize }}
+            - name: SERVER_PORT
+              value: {{ .Values.goserver.serverPort }}
+            - name: UPSTREAM_HOST
+              value: {{ .Values.goserver.upstreamHost }}
+            - name: UPSTREAM_PORT
+              value: {{ .Values.goserver.upstreamPort }}
+            - name: VERBOSE
+              value: {{ .Values.goserver.verbose }}
+          livenessProbe:
+            httpGet:
+              path: "{{ .Values.deployment.livenessProbe.endpointPath}}"
+              port: {{ .Values.goserver.serverPort }}
+            initialDelaySeconds: {{ .Values.deployment.livenessProbe.initialDelaySeconds}}
+            periodSeconds: {{ .Values.deployment.livenessProbe.periodSeconds}}
+          readinessProbe:
+            httpGet:
+              path: "{{ .Values.deployment.readinessProbe.endpointPath}}"
+              port: {{ .Values.goserver.serverPort }}
+            initialDelaySeconds: {{ .Values.deployment.readinessProbe.initialDelaySeconds}}
+            periodSeconds: {{ .Values.deployment.readinessProbe.periodSeconds}}
+          resources:
+            requests:
+              cpu: "{{ .Values.deployment.resources.requests.cpu }}"
+              memory: "{{ .Values.deployment.resources.requests.memory }}"

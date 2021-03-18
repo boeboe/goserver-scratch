@@ -1,0 +1,18 @@
+apiVersion: v2
+appVersion: 1.0.0
+description: A Helm chart for goserver, an http test server/client
+engine: gotpl
+keywords:
+  - istio
+  - aspenmesh
+  - performance
+  - benchmark
+  - golang
+maintainers:
+  - name: Bart Van Bos
+    email: bartvanbos@gmail.com
+name: goserver
+sources: 
+  - https://hub.docker.com/repository/docker/boeboe/goserver-scratch
+type: application
+version: 1.0.0

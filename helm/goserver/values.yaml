@@ -1,0 +1,31 @@
+deployment:
+  livenessProbe:
+    endpointPath: "/"
+    initialDelaySeconds: 30
+    periodSeconds: 30
+  pullPolicy: IfNotPresent
+  readinessProbe:
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    endpointPath: "/"
+  replicas: 1
+  resources:
+    requests:
+      cpu: 200m
+      memory: 256Mi
+
+goserver:
+  b3Trace: false
+  requestSize: 50
+  responseSize: 50
+  # serverName: (default to hostname = pod name in k8s)
+  serverPort: 9090
+  upstreamHost: service2
+  upstreamPort: 9090
+  verbose: false
+
+service:
+  account: service1
+  name: service1
+  portName: http-service1
+  version: 1.0.0
