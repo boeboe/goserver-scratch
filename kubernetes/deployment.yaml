@@ -27,7 +27,7 @@ spec:
               containerPort: 9090
           env:
             - name: B3_TRACE
-              value: true
+              value: "true"
             - name: REQUEST_SIZE
               value: 100
             - name: RESPONSE_SIZE
@@ -39,7 +39,7 @@ spec:
             - name: UPSTREAM_PORT
               value: 9090
             - name: VERBOSE
-              value: true
+              value: "true"
           livenessProbe:
             httpGet:
               path: "/"

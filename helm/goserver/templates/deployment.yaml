@@ -28,7 +28,7 @@ spec:
               containerPort: {{ .Values.goserver.serverPort }}
           env:
             - name: B3_TRACE
-              value: {{ .Values.goserver.b3Trace }}
+              value: "{{ .Values.goserver.b3Trace }}"
             - name: REQUEST_SIZE
               value: {{ .Values.goserver.requestSize }}
             - name: RESPONSE_SIZE
@@ -40,7 +40,7 @@ spec:
             - name: UPSTREAM_PORT
               value: {{ .Values.goserver.upstreamPort }}
             - name: VERBOSE
-              value: {{ .Values.goserver.verbose }}
+              value: "{{ .Values.goserver.verbose }}"
           livenessProbe:
             httpGet:
               path: "{{ .Values.deployment.livenessProbe.endpointPath}}"
