@@ -73,7 +73,7 @@ func (sc ServerConfig) get(res http.ResponseWriter, req *http.Request) {
 
 		if sc.verbose {
 			if sc.verbose {
-				log.Printf("Incoming reponse received")
+				log.Printf("Incoming response received")
 				requestDump, err := httputil.DumpResponse(upstreamresp, true)
 				if err != nil {
 					fmt.Println(err)
