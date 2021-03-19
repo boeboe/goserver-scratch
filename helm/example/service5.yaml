@@ -11,6 +11,8 @@ deployment:
     requests:
       cpu: 200m
       memory: 256Mi
+  nodeSelector:
+    role: application
 
 hpa:
   enabled: true
