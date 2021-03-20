@@ -38,7 +38,7 @@ var traceHeaders = []string{
 
 func (sc ServerConfig) get(res http.ResponseWriter, req *http.Request) {
 	if sc.verbose {
-		log.Printf("Incoming request received")
+		log.Printf("========== Incoming request received ==========")
 		requestDump, err := httputil.DumpRequest(req, true)
 		if err != nil {
 			fmt.Println(err)
@@ -74,7 +74,7 @@ func (sc ServerConfig) get(res http.ResponseWriter, req *http.Request) {
 
 		if sc.verbose {
 			if sc.verbose {
-				log.Printf("Incoming response received")
+				log.Printf("========== Incoming response received ==========")
 				requestDump, err := httputil.DumpResponse(upstreamresp, true)
 				if err != nil {
 					fmt.Println(err)
