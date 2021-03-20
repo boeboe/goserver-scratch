@@ -16,7 +16,7 @@ deployment:
     pod: {}
     pod_anti: {}
   tolerations: []
-  nodeSelector: []
+  nodeSelector: {}
 
 hpa:
   enabled: true
