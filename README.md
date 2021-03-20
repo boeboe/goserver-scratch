@@ -18,6 +18,8 @@ start a go http server and client with command line flag or environment variable
 Usage of goserver:
   -b3_trace
     	[B3_TRACE] Enable B3 header propagation for traces (default disabled)
+  -json
+      [JSON] Enable JSON for request/response bodies
   -help
     	Print this help
   -request_size int
