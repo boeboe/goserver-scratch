@@ -1,7 +1,7 @@
 # General release info
 APP_NAME				= goserver-scratch
 DOCKER_ACCOUNT	= boeboe
-VERSION					= 1.0.0
+VERSION					= 1.0.1
 
 # HELP
 # This will output the help for each task

@@ -31,6 +31,8 @@ spec:
           env:
             - name: B3_TRACE
               value: "{{ .Values.goserver.b3Trace }}"
+            - name: JSON
+              value: "{{ .Values.goserver.json }}"
             - name: REQUEST_SIZE
               value: "{{ .Values.goserver.requestSize }}"
             - name: RESPONSE_SIZE

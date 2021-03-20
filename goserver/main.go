@@ -16,6 +16,7 @@ import (
 
 type ServerConfig struct {
 	b3trace      bool
+	json         bool
 	requestsize  int
 	responsesize int
 	servername   string
@@ -94,8 +95,12 @@ func (sc ServerConfig) generateHttpBody() string {
 		b[i] = letter[rand.Intn(len(letter))]
 	}
 
-	return fmt.Sprintf("{\"timestamp\": \"%s\" ,\"server_name\": \"%s\", \"response\": \"%s\"}\n",
-		time.Now().Format("2006-01-02 15:04:05.000000"), sc.servername, string(b))
+	if sc.json {
+		return fmt.Sprintf("{\"timestamp\": \"%s\" ,\"server_name\": \"%s\", \"response\": \"%s\"}\n",
+			time.Now().Format("2006-01-02 15:04:05.000000"), sc.servername, string(b))
+	} else {
+		return string(b)
+	}
 }
 
 func copyTraceHeaders(req *http.Request, upstreamreq *http.Request) *http.Request {
@@ -116,6 +121,7 @@ func main() {
 
 	b3trace := flag.Bool("b3_trace", false, "[B3_TRACE] Enable B3 header propagation for traces (default disabled)")
 	help := flag.Bool("help", false, "Print this help")
+	json := flag.Bool("json", false, "[JSON] Enable JSON for request/response bodies")
 	requestsize := flag.Int("request_size", 50, "[REQUEST_SIZE] Request body size")
 	responsesize := flag.Int("response_size", 50, "[RESPONSE_SIZE] Respose body size")
 	servername := flag.String("server_name", hostname, "[SERVER_NAME] Name of server or hostname")
@@ -133,6 +139,7 @@ func main() {
 
 	sc := ServerConfig{
 		b3trace:      *b3trace,
+		json:         *json,
 		requestsize:  *requestsize,
 		responsesize: *responsesize,
 		servername:   *servername,
@@ -141,9 +148,9 @@ func main() {
 		upstreamport: *upstreamport,
 		verbose:      *verbose}
 
-	log.Printf("Bootstrap configuration:\n\tb3_trace: %t\n\trequest_size: %d\n\t"+
+	log.Printf("Bootstrap configuration:\n\tb3_trace: %t\n\tjson: %t\n\trequest_size: %d\n\t"+
 		"response_size: %d\n\tserver_name: %s\n\tserver_port: %d\n\tupstream_host: %s\n\t"+
-		"upstream_port: %d\n\tverbose: %t\n", sc.b3trace, sc.requestsize, sc.responsesize,
+		"upstream_port: %d\n\tverbose: %t\n", sc.b3trace, sc.json, sc.requestsize, sc.responsesize,
 		sc.servername, sc.serverport, sc.upstreamhost, sc.upstreamport, sc.verbose)
 
 	http.HandleFunc("/", sc.get)
