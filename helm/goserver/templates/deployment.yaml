@@ -61,7 +61,26 @@ spec:
             requests:
               cpu: "{{ .Values.deployment.resources.requests.cpu }}"
               memory: "{{ .Values.deployment.resources.requests.memory }}"
-{{- with .Values.deployment.nodeSelector }}
+      {{- if or (.Values.deployment.affinity.node) (or (.Values.deployment.pod) (.Values.deployment.pod_anti)) }}
+      affinity:
+        {{- if .Values.deployment.affinity.node }}
+        nodeAffinity:
+        {{- toYaml .Values.deployment.affinity.node | nindent 10 }}
+        {{- end }}
+        {{- if .Values.deployment.affinity.pod }}
+        podAffinity:
+        {{- toYaml .Values.deployment.affinity.pod | nindent 10 }}
+        {{- end }}
+        {{- if .Values.deployment.affinity.pod_anti }}
+        podAntiAffinity:
+        {{- toYaml .Values.deployment.affinity.pod_anti | nindent 10 }}
+        {{- end }}
+      {{- end }}
+      {{- if .Values.deployment.tolerations }}
+      tolerations:
+      {{- toYaml .Values.deployment.tolerations | nindent 8 }}
+      {{- end }}
+      {{- if .Values.deployment.node_selector }}
       nodeSelector:
-{{- toYaml . | nindent 8 }}
-{{- end }}
+      {{- toYaml .Values.deployment.node_selector | nindent 8 }}
+      {{- end }}
