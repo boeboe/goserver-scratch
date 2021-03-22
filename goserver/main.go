@@ -28,13 +28,17 @@ type ServerConfig struct {
 
 // B3 headers documented by Istio (https://istio.io/latest/faq/distributed-tracing)
 var traceHeaders = []string{
-	"X-Request-Id",
-	"X-B3-Traceid",
-	"X-B3-Spanid",
-	"X-B3-Parentspanid",
-	"X-B3-Sampled",
-	"X-B3-Flags",
-	"B3"}
+	"x-request-id",
+	"x-b3-traceid",
+	"x-b3-spanid",
+	"x-b3-parentspanid",
+	"x-b3-sampled",
+	"x-b3-flags",
+	"b3",
+	"x-ot-span-context",
+	"x-cloud-trace-context",
+	"traceparent",
+	"grpc-trace-bin"}
 
 func (sc ServerConfig) get(res http.ResponseWriter, req *http.Request) {
 	if sc.verbose {
